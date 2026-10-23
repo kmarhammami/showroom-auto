@@ -1,0 +1,111 @@
+<div class="filters-bar">
+
+    <div class="container">
+        <input type="text"
+               #brand
+               placeholder="Search by brand..."
+               (input)="selectAutos(brand.value)">
+
+        <fa-icon [icon]="faMagnifyingGlass" />
+    </div>
+    
+    <div class="brand-filter">
+    <label>Brand</label>
+
+    <select #selectedBrand
+        (change)="selectAutos(selectedBrand.value)">
+        <option value="">All brands</option>
+        <option value="Mercedes Benz">Mercedes Benz</option>
+        <option value="BMW">BMW</option>
+        <option value="Audi">Audi</option>
+        <option value="Jaguar">Jaguar</option>
+        <option value="Land Rover">Land Rover</option>
+        <option value="Alfa Romeo">Alfa Romeo</option>
+    </select>
+   </div>
+
+    <div class="price-filter">
+        <label>Maximum price :</label>
+
+        <select #price (change)="filterByPrice(price.value)">
+            <option value="0">All prices</option>
+            <option value="200">Up to 200 DNT</option>
+            <option value="300">Up to 300 DNT</option>
+            <option value="400">Up to 400 DNT</option>
+            <option value="500">Up to 500 DNT</option>
+        </select>
+    </div>
+     
+     <div class="availability-filter">
+      <label>Availability</label>
+
+      <select #availability
+        (change)="filterByAvailability(availability.value)">
+        <option value="all">All cars</option>
+        <option value="stock">In stock only</option>
+      </select>
+     </div>
+
+
+    <div class="sort-filter">
+    <label>Sort by</label>
+
+    <select #sort (change)="sortAutos(sort.value)">
+        <option value="default">Default order</option>
+        <option value="asc">Price (low to high)</option>
+        <option value="desc">Price (high to low)</option>
+    </select>
+</div>
+
+<div class="reset-filter">
+      <button (click)="resetFilters(); brand.value=''; selectedBrand.value=''; price.value='0'; sort.value='default'; availability.value='all'">
+    ↻ Reset filters
+</button>
+</div>
+
+</div>
+
+<div class="results-count">
+
+    <span>
+        ♥ {{favorites.length}} Favorites
+    </span>
+
+    <button class="show-favorites-btn"
+            (click)="toggleShowFavorites()">
+        {{showFavoritesOnly ? 'Show All Cars' : '♥ Show Favorites'}}
+    </button>
+
+    <span>
+        {{selectedAutos.length}}
+        {{selectedAutos.length === 1 ? 'car' : 'cars'}} found
+    </span>
+
+</div>
+
+<div class="cars-container">
+    <!-- // terme decorateur avec@   -->
+    @for(auto of selectedAutos; track auto.id) {
+        <div class="auto-card">
+             <!-- ${}cree une chaine de carac qui contient des partie fixes et des parties dynamique -->
+             
+               <button class="favorite-btn"
+                  [class.is-favorite]="favorites.includes(auto.id)"
+                 (click)="toggleFavorite(auto)">
+                  ♥
+               </button>
+             <img [src]="'images/' + auto.photo">
+            <div class="details">
+                <h3>{{auto.brand}} {{auto.model}}</h3>
+                <p>
+                    power : {{auto.power}} <br>
+                    price : {{auto.price}} DNT <br>
+                    only {{auto.availability}} units in stock
+                </p>
+            </div>
+            <div class="see_more">
+                <button (click)="selectCar(auto)">See more ... </button>
+            </div>
+        </div>
+    }
+</div>

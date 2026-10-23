@@ -1,0 +1,303 @@
+
+/*  BARRE DES FILTRES */
+
+.filters-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    background: linear-gradient(135deg, #ffffff, #f4e6f9);
+    padding: 18px 20px;
+    margin: 20px;
+    border-radius: 22px;
+    box-shadow: 0 5px 20px rgba(117, 70, 139, 0.12);
+}
+
+
+/* BARRE DE RECHERCHE*/
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    width: 320px;
+    flex: 0 0 auto;
+    padding: 12px 18px;
+
+    background: linear-gradient(135deg, #ffffff, #f5eafa);
+    border: 2px solid #d5b8df;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(117, 70, 139, 0.12);
+
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.container:focus-within {
+    border-color: #a55abb;
+    box-shadow: 0 0 15px rgba(165, 90, 187, 0.4);
+    transform: translateY(-2px);
+}
+
+.container input {
+    all: unset;
+    flex: 1;
+    min-width: 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #4b2d57;
+}
+
+.container input::placeholder {
+    color: #a777b7;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.container fa-icon {
+    color: #79488c;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.container:focus-within fa-icon {
+    transform: scale(1.2);
+}
+
+
+/* FILTRES BRAND, PRICE ET SORT */
+
+.brand-filter,
+.price-filter,
+.sort-filter,
+.availability-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 5px;
+
+    flex: 0 0 auto;
+    min-height: 64px;
+    padding: 8px 14px;
+
+    background: white;
+    border: 1px solid #e4d0eb;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(117, 70, 139, 0.1);
+
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.brand-filter label,
+.price-filter label,
+.sort-filter label,
+.availability-filter label {
+    font-size: 12px;
+    font-weight: normal;
+    color: #795188;
+    margin: 0;
+}
+
+.brand-filter select,
+.price-filter select,
+.sort-filter select,
+.availability-filter select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 0;
+
+    color: #452950;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: pointer;
+    outline: none;
+}
+
+.brand-filter:hover,
+.price-filter:hover,
+.sort-filter:hover,
+.availability-filter:hover {
+    border-color: #b77ac5;
+    box-shadow: 0 5px 15px rgba(117, 70, 139, 0.2);
+}
+
+
+/* CONTENEUR DES VOITURES */
+
+.cars-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+}
+
+
+/* CARTES DES VOITURES */
+
+.auto-card {
+    width: 320px;
+    max-width: 100%;
+    height: fit-content;
+    margin: 10px;
+    padding: 10px;
+
+    background: linear-gradient(145deg, #ffffff, #f7effa);
+    border: 2px solid rgb(75, 45, 87);
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px rgb(75, 45, 87);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auto-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 10px 12px 20px rgb(75, 45, 87);
+}
+
+.auto-card img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.auto-card:hover img {
+    transform: scale(1.06);
+}
+
+.auto-card h3 {
+    color: rgb(75, 45, 87);
+}
+
+.auto-card .details {
+    padding: 10px 5px;
+}
+
+
+/*BOUTON SEE MORE  */
+
+.see_more button {
+    all: unset;
+    background-color: rgb(117, 70, 139);
+    color: white;
+    font-weight: bold;
+
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+}
+
+.see_more button:hover {
+    background-color: rgb(75, 45, 87);
+}
+
+/* Compteur de voitures */
+.results-count {
+    text-align: right;
+    margin: 20px 35px;
+    color: #8b3da1;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Bouton Reset filters */
+.reset-filter button {
+    background: linear-gradient(135deg, #9536aa, #5a186e);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.reset-filter button:hover {
+    background: linear-gradient(135deg, #b44ac8, #74258b);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(117, 70, 139, 0.3);
+}
+
+/* Bouton favoris */
+.auto-card {
+    position: relative;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    background: white;
+    color: #b8a0c0;
+    border: 1px solid #e4d0eb;
+    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 23px;
+    cursor: pointer;
+    z-index: 2;
+
+    transition: all 0.3s ease;
+}
+
+.favorite-btn:hover {
+    color: #e63970;
+    transform: scale(1.15);
+}
+
+/* Coeur sélectionné */
+.favorite-btn.is-favorite {
+    color: #e63970;
+    background-color: #fff0f5;
+    border-color: #e63970;
+}
+
+/* Compteur favoris et voitures */
+.results-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.results-count span:first-child {
+    color: #e63970;
+}
+
+/* Bouton Show Favorites */
+.show-favorites-btn {
+    background: linear-gradient(135deg, #a855b8, #722c87);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.show-favorites-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(117, 70, 139, 0.3);
+}
