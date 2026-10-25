@@ -1,59 +1,102 @@
-# ShowroomAuto
+# ShowroomAuto — Projet Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.1.
+## Présentation du projet
 
-## Development server
+ShowroomAuto est une application web développée avec Angular dans le cadre du TP2 du cours Angular.
 
-To start a local development server, run:
+L'objectif de ce projet est de créer un showroom automobile interactif permettant aux utilisateurs de consulter différentes voitures, de rechercher des modèles, de filtrer les résultats et d'afficher les détails de chaque véhicule.
 
-```bash
-ng serve
-```
+J'ai également essayé d'enrichir l'application de départ en ajoutant de nouvelles fonctionnalités et en améliorant son design avec CSS.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Fonctionnalités
 
-## Code scaffolding
+Voici les principales fonctionnalités de mon application :
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Recherche :** rechercher des voitures par marque.
+- **Filtre par marque :** sélectionner une marque précise.
+- **Filtre par prix :** afficher les voitures selon un prix maximum.
+- **Tri :** classer les voitures par prix croissant ou décroissant.
+- **Disponibilité :** filtrer les voitures disponibles en stock.
+- **Favoris :** ajouter ou retirer une voiture des favoris en cliquant sur le cœur.
+- **Show Favorites :** afficher uniquement les voitures ajoutées aux favoris.
+- **Reset filters :** réinitialiser les filtres en un seul clic.
+- **See more :** ouvrir une fenêtre contenant la photo, la description et les informations de la voiture.
+- **Compteur :** afficher le nombre de voitures correspondant aux filtres.
 
-```bash
-ng generate component component-name
-```
+## Améliorations du design
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+J'ai aussi travaillé sur l'apparence de l'application pour rendre son utilisation plus agréable :
 
-```bash
-ng generate --help
-```
+- Un en-tête avec une image de voiture et un fond dégradé.
+- Un thème violet avec des ombres et des bordures arrondies.
+- Des animations sur les cartes des voitures.
+- Une barre de recherche et des filtres mieux organisés.
+- Une fenêtre pour afficher les détails des voitures.
+- Des boutons interactifs et des cœurs pour les favoris.
 
-## Building
+## Technologies utilisées
 
-To build the project run:
+- Angular
+- TypeScript
+- HTML
+- CSS
+- Font Awesome pour les icônes
+- Git et GitHub
+- GitHub Pages pour le déploiement
 
-```bash
-ng build
-```
+## Concepts Angular utilisés
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Ce projet m'a permis de pratiquer plusieurs notions vues en cours :
 
-## Running unit tests
+- La création et l'utilisation des composants Angular.
+- `@Input()` pour transmettre des données du composant parent vers le composant enfant.
+- `@Output()` et `EventEmitter` pour envoyer des informations du composant enfant vers le parent.
+- Les événements `(click)`, `(input)` et `(change)`.
+- Les directives `@for` et `@if` pour afficher les données.
+- L'interpolation `{{ }}` pour afficher des valeurs dynamiques.
+- Les fonctions TypeScript, les tableaux, les conditions, le filtrage et le tri.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Pour la communication entre les composants, j'ai utilisé `@Input()` et `@Output()`, sans utiliser les Signals.
 
-```bash
-ng test
-```
+## Exécution du projet
 
-## Running end-to-end tests
+Pour lancer l'application en local :
 
-For end-to-end (e2e) testing, run:
+1. Cloner le dépôt :
 
-```bash
-ng e2e
-```
+   `git clone https://github.com/kmarhammami/showroom-auto.git`
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+2. Ouvrir le dossier du projet :
 
-## Additional Resources
+   `cd showroom-auto`
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. Installer les dépendances :
+
+   `npm install`
+
+4. Démarrer le serveur Angular :
+
+   `npx ng serve`
+
+5. Ouvrir `http://localhost:4200/` dans le navigateur.
+
+## Liens du projet
+
+**Dépôt GitHub :**  
+https://github.com/kmarhammami/showroom-auto
+
+**Application déployée :**  
+https://kmarhammami.github.io/showroom-auto/
+
+## Conclusion
+
+Ce projet m'a permis de mieux comprendre le fonctionnement d'Angular et la communication entre les composants.
+
+J'ai appris à relier le HTML au TypeScript, à manipuler des données avec différentes fonctions et à améliorer l'interface avec CSS.
+
+C'était aussi une bonne occasion de pratiquer GitHub et de découvrir comment déployer une application Angular.
+
+---
+
+**Réalisé par : Kmar Hammami**  
+**TP2 — Angular | Année universitaire 2026-2027**
