@@ -1,22 +1,144 @@
+
+<!-- Composant enfant : Header -->
 <app-head-bar></app-head-bar>
 
+<!-- Composant enfant : Catalogue des voitures -->
 <app-seach-bar
     [autos]="autoList"
     (onSelectCar)="selectCar($event)">
 </app-seach-bar>
 
+
+
+<!-- CONTACT SECTION - SHOWROOMAUTO -->
+<section class="contact-section" id="contact">
+
+    <div class="contact-container">
+
+        <div class="contact-text">
+
+            <p class="contact-label">
+                WELCOME TO SHOWROOMAUTO
+            </p>
+
+            <h2>Your Dream Car Awaits.</h2>
+
+            <p class="contact-description">
+                Explore our exclusive selection of premium vehicles,
+                combining elegance, comfort and performance.
+                Find the perfect car that matches your style
+                and lifestyle.
+            </p>
+
+            <a class="contact-button" href="#cars">
+                Explore Our Collection →
+            </a>
+
+        </div>
+
+        <div class="contact-card">
+
+            <div class="contact-card-icon">✦</div>
+
+            <h3>Why Choose ShowroomAuto?</h3>
+
+            <p>
+                Discover a premium car shopping experience
+                designed around your needs.
+            </p>
+
+            <div class="contact-divider"></div>
+
+            <div class="contact-feature">
+                <span>✓</span>
+                Exclusive Vehicle Collection
+            </div>
+
+            <div class="contact-feature">
+                <span>✓</span>
+                Detailed Car Specifications
+            </div>
+
+            <div class="contact-feature">
+                <span>✓</span>
+                Easy Vehicle Comparison
+            </div>
+
+            <a class="github-link" href="#cars">
+                Discover Our Vehicles →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <h2>SHOWROOM<span>AUTO</span></h2>
+
+            <p>
+                Discover elegance, comfort and performance.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#cars">Our Cars</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-project">
+            <h3>About the Project</h3>
+
+            <p>Angular TP2</p>
+            <p>Developed by Kmar Hammami</p>
+
+            <a
+                href="https://github.com/kmarhammami/showroom-auto"
+                target="_blank"
+                rel="noopener noreferrer">
+                GitHub Repository ↗
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 ShowroomAuto. Academic Project.</p>
+        <p>Designed & Developed by Kmar Hammami</p>
+    </div>
+
+</footer>
+
+
+<!-- Fenêtre View Details : code original conservé -->
 @if(selectedCar){
     <div class="modal-overlay">
         <div class="modal-content">
 
-            <button class="close-btn"
-                    (click)="selectedCar = null">
+            <button
+                class="close-btn"
+                aria-label="Close details"
+                (click)="selectedCar = null">
                 ✕
             </button>
 
             <h2>{{selectedCar.brand}} {{selectedCar.model}}</h2>
 
-            <img [src]="'images/' + selectedCar.photo">
+            <img
+                [src]="'images/' + selectedCar.photo"
+                [alt]="selectedCar.brand + ' ' + selectedCar.model">
 
             <p>{{selectedCar.description}}</p>
 

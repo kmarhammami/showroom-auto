@@ -1,111 +1,315 @@
-<div class="filters-bar">
 
-    <div class="container">
-        <input type="text"
-               #brand
-               placeholder="Search by brand..."
-               (input)="selectAutos(brand.value)">
+<!-- Section Our Cars : destination du menu de navigation -->
+<div class="filters-bar" id="cars">
 
-        <fa-icon [icon]="faMagnifyingGlass" />
-    </div>
-    
-    <div class="brand-filter">
+  <div class="container">
+    <input type="text"
+           #brand
+           placeholder="Search by brand..."
+           (input)="selectAutos(brand.value)">
+    <fa-icon [icon]="faMagnifyingGlass" />
+  </div>
+
+  <div class="brand-filter">
     <label>Brand</label>
-
-    <select #selectedBrand
-        (change)="selectAutos(selectedBrand.value)">
-        <option value="">All brands</option>
-        <option value="Mercedes Benz">Mercedes Benz</option>
-        <option value="BMW">BMW</option>
-        <option value="Audi">Audi</option>
-        <option value="Jaguar">Jaguar</option>
-        <option value="Land Rover">Land Rover</option>
-        <option value="Alfa Romeo">Alfa Romeo</option>
+    <select #selectedBrand (change)="selectAutos(selectedBrand.value)">
+      <option value="">All brands</option>
+      <option value="Mercedes Benz">Mercedes Benz</option>
+      <option value="BMW">BMW</option>
+      <option value="Audi">Audi</option>
+      <option value="Jaguar">Jaguar</option>
+      <option value="Land Rover">Land Rover</option>
+      <option value="Alfa Romeo">Alfa Romeo</option>
     </select>
-   </div>
+  </div>
 
-    <div class="price-filter">
-        <label>Maximum price :</label>
+  <div class="price-filter">
+    <label>Maximum price</label>
+    <select #price (change)="filterByPrice(price.value)">
+      <option value="0">All prices</option>
+      <option value="200">Up to 200 DNT</option>
+      <option value="300">Up to 300 DNT</option>
+      <option value="400">Up to 400 DNT</option>
+      <option value="500">Up to 500 DNT</option>
+    </select>
+  </div>
 
-        <select #price (change)="filterByPrice(price.value)">
-            <option value="0">All prices</option>
-            <option value="200">Up to 200 DNT</option>
-            <option value="300">Up to 300 DNT</option>
-            <option value="400">Up to 400 DNT</option>
-            <option value="500">Up to 500 DNT</option>
-        </select>
-    </div>
-     
-     <div class="availability-filter">
-      <label>Availability</label>
+  <div class="availability-filter">
+    <label>Availability</label>
+    <select #availability
+            (change)="filterByAvailability(availability.value)">
+      <option value="all">All cars</option>
+      <option value="stock">In stock only</option>
+    </select>
+  </div>
 
-      <select #availability
-        (change)="filterByAvailability(availability.value)">
-        <option value="all">All cars</option>
-        <option value="stock">In stock only</option>
-      </select>
-     </div>
-
-
-    <div class="sort-filter">
+  <div class="sort-filter">
     <label>Sort by</label>
-
     <select #sort (change)="sortAutos(sort.value)">
-        <option value="default">Default order</option>
-        <option value="asc">Price (low to high)</option>
-        <option value="desc">Price (high to low)</option>
+      <option value="default">Default order</option>
+      <option value="asc">Price (low to high)</option>
+      <option value="desc">Price (high to low)</option>
     </select>
+  </div>
+
+  <div class="reset-filter">
+    <button
+      (click)="resetFilters(); brand.value=''; selectedBrand.value=''; price.value='0'; sort.value='default'; availability.value='all'">
+      ↻ Reset filters
+    </button>
+  </div>
+
 </div>
 
-<div class="reset-filter">
-      <button (click)="resetFilters(); brand.value=''; selectedBrand.value=''; price.value='0'; sort.value='default'; availability.value='all'">
-    ↻ Reset filters
-</button>
-</div>
-
-</div>
-
+<!-- Barre des résultats -->
 <div class="results-count">
 
-    <span>
-        ♥ {{favorites.length}} Favorites
-    </span>
+  <span class="favorites-count">
+    ♥ {{favorites.length}} Favorites
+  </span>
 
-    <button class="show-favorites-btn"
-            (click)="toggleShowFavorites()">
-        {{showFavoritesOnly ? 'Show All Cars' : '♥ Show Favorites'}}
-    </button>
+  <button class="show-favorites-btn"
+          (click)="toggleShowFavorites()">
+    {{showFavoritesOnly ? 'Show All Cars' : '♥ Show Favorites'}}
+  </button>
 
-    <span>
-        {{selectedAutos.length}}
-        {{selectedAutos.length === 1 ? 'car' : 'cars'}} found
-    </span>
+  <span class="cars-count">
+    {{selectedAutos.length}}
+    {{selectedAutos.length === 1 ? 'car' : 'cars'}} found
+  </span>
 
 </div>
 
+<!-- Catalogue des voitures -->
 <div class="cars-container">
-    <!-- // terme decorateur avec@   -->
-    @for(auto of selectedAutos; track auto.id) {
-        <div class="auto-card">
-             <!-- ${}cree une chaine de carac qui contient des partie fixes et des parties dynamique -->
-             
-               <button class="favorite-btn"
-                  [class.is-favorite]="favorites.includes(auto.id)"
-                 (click)="toggleFavorite(auto)">
-                  ♥
-               </button>
-             <img [src]="'images/' + auto.photo">
-            <div class="details">
-                <h3>{{auto.brand}} {{auto.model}}</h3>
-                <p>
-                    power : {{auto.power}} <br>
-                    price : {{auto.price}} DNT <br>
-                    only {{auto.availability}} units in stock
-                </p>
-            </div>
-            <div class="see_more">
-                <button (click)="selectCar(auto)">See more ... </button>
-            </div>
+
+  @for(auto of selectedAutos; track auto.id) {
+
+    <div class="auto-card">
+
+      <!-- Favoris -->
+      <button class="favorite-btn"
+              [class.is-favorite]="favorites.includes(auto.id)"
+              (click)="toggleFavorite(auto)"
+              aria-label="Add or remove favorite">
+        ♥
+      </button>
+
+      <!-- Image et disponibilité -->
+      <div class="car-image-wrapper">
+
+        <div class="stock-badge"
+             [class.low-stock]="auto.availability > 0 && auto.availability <= 2"
+             [class.out-of-stock]="auto.availability === 0">
+
+          @if(auto.availability === 0) {
+            Out of Stock
+          } @else if(auto.availability <= 2) {
+            Low Stock
+          } @else {
+            In Stock
+          }
+
         </div>
-    }
+
+        <img [src]="'images/' + auto.photo"
+             [alt]="auto.brand + ' ' + auto.model">
+
+      </div>
+
+      <!-- Informations -->
+      <div class="details">
+
+        <p class="car-category">PREMIUM COLLECTION</p>
+
+        <h3>{{auto.brand}} {{auto.model}}</h3>
+
+        <div class="car-specs">
+          <span>⚡ Power: {{auto.power}}</span>
+          <span>● {{auto.availability}} available</span>
+        </div>
+
+        <div class="car-price">
+          <small>Starting from</small>
+          <strong>{{auto.price}} DNT</strong>
+        </div>
+
+      </div>
+
+      <!-- Voir les détails -->
+      <div class="see_more">
+        <button (click)="selectCar(auto)">
+          View Details <span>→</span>
+        </button>
+
+            
+<button
+  type="button"
+  class="compare-select-btn"
+  [class.compare-selected]="isCompared(auto)"
+  [disabled]="compareCars.length === 2 && !isCompared(auto)"
+  (click)="toggleCompare(auto)">
+
+  {{ isCompared(auto) ? '✓ Selected' : '⇄ Compare' }}
+
+</button>
+
+      </div>
+
+    </div>
+
+  }
+
+  @if(selectedAutos.length === 0) {
+
+    <div class="empty-state">
+      <div class="empty-icon">⌕</div>
+      <h2>No cars found</h2>
+      <p>
+        We couldn't find a car matching your search.
+        Try changing your filters.
+      </p>
+      <button
+        (click)="resetFilters(); brand.value=''; selectedBrand.value=''; price.value='0'; sort.value='default'; availability.value='all'">
+        ↻ Reset Filters
+      </button>
+    </div>
+
+  }
+
 </div>
+
+<!-- Barre de comparaison -->
+@if(compareCars.length > 0) {
+
+  <div class="compare-bottom-bar">
+
+    <div class="compare-bar-info">
+      <span class="compare-bar-icon">⇄</span>
+
+      <div>
+        <strong>Compare Cars</strong>
+        <p>
+          {{compareCars.length}} / 2 cars selected
+        </p>
+      </div>
+    </div>
+
+    <div class="compare-bar-actions">
+
+      <button
+        class="compare-clear-btn"
+        (click)="clearComparison()">
+        Clear
+      </button>
+
+      <button
+        class="compare-open-btn"
+        [disabled]="compareCars.length !== 2"
+        (click)="openComparison()">
+        Compare Now
+      </button>
+
+    </div>
+  </div>
+
+}
+
+<!-- Fenêtre de comparaison -->
+@if(showComparison && compareCars.length === 2) {
+
+  <div class="compare-overlay"
+       (click)="closeComparison()">
+
+    <div class="compare-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-label="Car comparison"
+         (click)="$event.stopPropagation()">
+
+      <div class="compare-modal-header">
+
+        <div>
+          <span class="compare-subtitle">
+            SHOWROOMAUTO
+          </span>
+          <h2>Compare Your Cars</h2>
+          <p>Find the car that suits you best.</p>
+        </div>
+
+        <button
+          class="compare-close-btn"
+          aria-label="Close comparison"
+          (click)="closeComparison()">
+          ×
+        </button>
+
+      </div>
+
+      <div class="compare-grid">
+
+        @for(car of compareCars; track car.id) {
+
+          <div class="compare-car">
+
+            <div class="compare-photo">
+              <img
+                [src]="'images/' + car.photo"
+                [alt]="car.brand + ' ' + car.model">
+            </div>
+
+            <div class="compare-car-info">
+
+              <span class="compare-car-label">
+                PREMIUM VEHICLE
+              </span>
+
+              <h3>{{car.brand}} {{car.model}}</h3>
+
+              <div class="compare-spec-row">
+                <span>Price</span>
+                <strong>{{car.price}} DNT</strong>
+              </div>
+
+              <div class="compare-spec-row">
+                <span>Power</span>
+                <strong>{{car.power}}</strong>
+              </div>
+
+              <div class="compare-spec-row">
+                <span>Availability</span>
+                <strong>
+                  {{car.availability}} units
+                </strong>
+              </div>
+
+              <div class="compare-spec-row">
+                <span>Status</span>
+
+                <strong
+                  [class.compare-out]="car.availability === 0"
+                  [class.compare-in]="car.availability > 0">
+                  {{car.availability > 0 ? 'In Stock' : 'Out of Stock'}}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+      <div class="compare-modal-footer">
+        <button (click)="closeComparison()">
+          Back to Showroom
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+}
+

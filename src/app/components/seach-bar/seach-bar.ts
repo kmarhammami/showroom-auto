@@ -88,4 +88,47 @@ toggleShowFavorites() {
   selectCar(auto:Auto){
     this.onSelectCar.emit(auto)
   }
+
+  
+  // Liste des voitures choisies pour la comparaison
+  compareCars: Auto[] = [];
+
+  // Afficher ou fermer la fenêtre de comparaison
+  showComparison: boolean = false;
+
+  // Ajouter ou retirer une voiture
+  toggleCompare(auto: Auto) {
+    if (this.compareCars.some(car => car.id === auto.id)) {
+      this.compareCars = this.compareCars.filter(
+        car => car.id !== auto.id
+      );
+    }
+    else if (this.compareCars.length < 2) {
+      this.compareCars.push(auto);
+    }
+  }
+
+  // Vérifier si une voiture est déjà sélectionnée
+  isCompared(auto: Auto): boolean {
+    return this.compareCars.some(car => car.id === auto.id);
+  }
+
+  // Ouvrir la comparaison de deux voitures
+  openComparison() {
+    if (this.compareCars.length === 2) {
+      this.showComparison = true;
+    }
+  }
+
+  // Fermer la fenêtre
+  closeComparison() {
+    this.showComparison = false;
+  }
+
+  // Vider la sélection
+  clearComparison() {
+    this.compareCars = [];
+    this.showComparison = false;
+  }
+
 }

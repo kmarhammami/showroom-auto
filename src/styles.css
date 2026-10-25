@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* Navigation fluide entre les sections */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Petit espace au-dessus de chaque section */
+#home,
+#cars,
+#about,
+#contact {
+  scroll-margin-top: 20px;
+}
+
+/* Respecter les préférences d'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
